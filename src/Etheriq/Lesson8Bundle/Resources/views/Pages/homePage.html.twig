@@ -1,0 +1,51 @@
+{% extends 'EtheriqLesson8Bundle::base.html.twig' %}
+
+{% block title %}
+    Home page
+{% endblock title %}
+
+{% block header %}
+   <nav> header </nav>
+{% endblock header %}
+
+    {% block guestForm %}
+    <div>
+        <div class="col-md-offset-3 col-md-6" style="border: solid 1px;">
+            <form action="" method="post" name="guestForm" class="" >
+            <div class="row">
+                <div style="border: solid 1px;">
+                    <div class="col-md-5">
+                        <label for="a1">Name</label>
+                        <input type="tel" name="tt" id="a1">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="a2">Name</label>
+                        <input type="text" name="tt2" id="a2">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit">Fire</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-12">
+                        <label for="a3">Text</label>
+                        <textarea name="teare" rows="5" id="a3">
+                            dfsdfsd
+                        </textarea>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    {% endblock guestForm %}
+
+    {% block content %}
+
+        KONTENT  Yo
+
+    {% endblock content %}
+
+    {% block footer %}
+        footer
+    {% endblock footer %}
