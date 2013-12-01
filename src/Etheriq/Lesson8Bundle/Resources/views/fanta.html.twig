@@ -1,0 +1,107 @@
+{% extends 'EtheriqLesson8Bundle::base.html.twig' %}
+
+{% block title %}
+    Home page
+{% endblock title %}
+
+{% block header %}
+    <nav>
+        <div class="pagerfanta">
+            {{ pagerfanta(pagerfanta, 'myFantaSet') }}
+        </div>
+    </nav>
+{% endblock header %}
+
+    {% block guestForm %}
+        <div>
+            <div class="col-md-offset-3 col-md-6">
+                <form action="" method="post" name="guestForm" class="" >
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="a1">Name</label>
+                            <input type="tel" name="tt" id="a1">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="a2">Name</label>
+                            <input type="text" name="tt2" id="a2">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit">Fire</button>
+                        </div>
+                    </div>
+                    <div class="row" style=" margin-top: 15px; margin-bottom: 15px;">
+                        <div class="col-md-12">
+                            <label for="a3">Text</label>
+                            <textarea name="teare" id="a3" style="height: 100%; width: 90%;">
+                                dfsdfsd
+                            </textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endblock guestForm %}
+
+    {% block content %}
+
+        {% for item in data %}
+            {{ loop.index }}. id= {{ item.id }} {{ item.getNameGuest() }} | {{ item.getEmailGuest() }} <br>
+        {% endfor %}
+
+
+
+
+
+
+                {#{% for job in pagerfanta.CurrentPageResults %}#}
+                    {#<tr class="{{ cycle(['even', 'odd'], loop.index) }}">#}
+                        {#<td class="location">{{ job.location }}</td>#}
+                        {#<td class="position">#}
+                            {#<a href="{{ path('job_show', { 'id' : job.id, 'company' : job.companySlug, 'position' : job.positionSlug, 'location' : job.locationSlug}) }}">{{ job.position }}</a>#}
+                        {#</td>#}
+
+                        {#<td class="company">#}
+                            {#{{ job.company }}#}
+                        {#</td>#}
+                    {#</tr>#}
+                {#{% endfor %}#}
+
+    {#{% if pagerfanta.haveToPaginate %}#}
+        {#<div class="pagination">#}
+
+            {#{%-if pagerfanta.hasPreviousPage -%}#}
+                {#<a href="{{path('fanta', {'page': pagerfanta.PreviousPage})}}"> Prev </a>#}
+            {#{%- endif -%}#}
+
+            {#{% for page in 1..pagerfanta.NbPages %}#}
+                {#{%-if page is sameas(pagerfanta.CurrentPage)-%}#}
+                    {#{{ page }}#}
+                {#{%-else-%}#}
+                    {#<a href="{{path('fanta', {'page': page})}}"> {{page}} </a>#}
+                {#{%-endif-%}#}
+            {#{% endfor %}#}
+
+            {#{%-if pagerfanta.hasNextPage -%}#}
+                {#<a href="{{path('fanta', {'page': pagerfanta.NextPage})}}"> Next </a>#}
+            {#{%- endif -%}#}
+        {#</div>#}
+
+        {#<div class="pagination_desc">#}
+            {#<strong>{{pagerfanta.NbResults}}</strong> jobs in this category#}
+
+            {#{%-if pagerfanta.haveToPaginate -%}#}
+                {#- page <strong>{{pagerfanta.CurrentPage}}/{{pagerfanta.NbPages}}</strong>#}
+            {#{%-endif-%}#}
+        {#</div>#}
+    {#{%-endif-%}#}
+
+
+
+
+
+
+    {% endblock content %}
+
+    {% block footer %}
+        footer
+    {% endblock footer %}

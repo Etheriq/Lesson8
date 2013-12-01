@@ -1,3 +1,17 @@
 homepage:
-    pattern:  /
-    defaults: { _controller: EtheriqLesson8Bundle:Main:showHomePage }
+    pattern:  /{page}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:showHomePage, page: 1 }
+    requirements:
+            page:  \d+
+
+show_info:
+    pattern: /show/{id}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:showMoreInfo, id: 1 }
+    requirements:
+                id:  \d+
+
+delete_item:
+    pattern: /del/{id}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:deleteItem, id: 1 }
+    requirements:
+                id:  \d+

@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "twbs/bootstrap": "v3.0.2",
         "components/jquery": "1.10.2",
-        "white-october/pagerfanta-bundle": "dev-master"
+        "white-october/pagerfanta-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "v2.2.0"
     },
     "scripts": {
         "post-install-cmd": [
