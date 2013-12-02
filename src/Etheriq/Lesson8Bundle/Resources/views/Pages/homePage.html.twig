@@ -1,0 +1,134 @@
+{% extends 'EtheriqLesson8Bundle::base.html.twig' %}
+
+{% block title %}
+    Home page
+{% endblock title %}
+
+{% block header %}
+   <nav>
+            <div class="col-md-7" style="text-align: right;">
+                <div class="pagerfanta">
+                    {{ pagerfanta(fanta, 'myFantaSet') }}
+                </div>
+            </div>
+            <div class="col-md-4" style="text-align: left;">
+                <div style="padding-top: 35px;">
+                <strong>{{fanta.NbResults}}</strong> guests has found.
+
+                {% if fanta.haveToPaginate %}
+                    Page <strong>{{fanta.CurrentPage}}/{{fanta.NbPages}} </strong>
+                {%-endif-%}
+                </div>
+            </div>
+   </nav>
+{% endblock header %}
+
+    {% block guestForm %}
+
+        {#<div class="form_container">#}
+            {#<div class="row">#}
+                {#<div class="col-xs-5">#}
+                    {#<label for="a1">Name</label>#}
+                    {#<input type="tel" name="tt" id="a1">#}
+                    {#&#123;&#35;{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Name' }}) }}&#35;&#125;#}
+                {#</div>#}
+                {#<div class="col-xs-5">#}
+                    {#<label for="a2">e-mail</label>#}
+                    {#<input type="text" name="tt2" id="a2">#}
+                    {#&#123;&#35;{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email' }}) }}&#35;&#125;#}
+                {#</div>#}
+                {#<div class="col-xs-2">#}
+                    {#<button class="btn btn-sm btn-primary" type="submit">Огонь</button>#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="form-group">#}
+                {#<label for="a3">Text</label>#}
+                {#<textarea name="teare" id="a3" style="height: 100%; width: 90%;">#}
+                {#dfsdfsd#}
+                {#</textarea>#}
+
+                {#&#123;&#35;{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message' }}) }}&#35;&#125;#}
+            {#</div>#}
+        {#</div>#}
+
+
+    <div>
+        <div class="col-md-offset-3 col-md-6">
+            <form action="" method="post" name="guestForm" class="" >
+            <div class="row">
+                <div class="col-md-5">
+                    <label for="a1">Name</label>
+                    <input type="tel" name="tt" id="a1">
+                </div>
+                <div class="col-md-5">
+                    <label for="a2">e-mail</label>
+                    <input type="text" name="tt2" id="a2">
+                </div>
+                <div class="col-md-1">
+                    <button type="submit">Fire</button>
+                </div>
+            </div>
+            <div class="row" style=" margin-top: 15px; margin-bottom: 15px;">
+                <div class="col-md-12">
+                    <label for="a3">Text</label>
+                    <textarea name="teare" id="a3" style="height: 100%; width: 90%;">
+dfsdfsd
+                    </textarea>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    {% endblock guestForm %}
+
+    {% block content %}
+
+    {% if fanta.haveToPaginate %}
+        {% for item in fanta %}
+            <div class="well">
+                <u>Запись id # {{ item.id }}</u>.
+                <a href="{{ path('delete_item', {'id': item.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{{ path('show_info', {'id': item.id}) }}" class="btn btn-info btn-sm">More info</a>
+                <hr>
+                <b>{{ item.getNameGuest() }}</b>  |  {{ item.getEmailGuest() }} <br>
+                {{ item.getBodyGuest()[:60] }}...<br>
+            </div>
+        {% endfor %}
+    {% else %}
+        end
+    {% endif %}
+
+    {% endblock content %}
+
+    {% block footer %}
+
+        <div class="pagerfanta">
+            {{ pagerfanta(fanta, 'myFantaSet') }}
+        </div>
+
+        {#{% if pagerfanta.haveToPaginate %}#}
+            {#<div class="pagination">#}
+
+            {#{% if pagerfanta.hasPreviousPage  %}#}
+            {#<a href="{{path('homepage', {'page': pagerfanta.PreviousPage})}}"> Prev </a>#}
+            {#{% endif %}#}
+
+            {#{% for page in 1..pagerfanta.NbPages %}#}
+                {#{% if page is sameas(pagerfanta.CurrentPage) %}#}
+                    {#{{ page }}#}
+                {#{% else %}#}
+                {#<a href="{{path('homepage', {'page': page})}}"> {{page}} </a>#}
+                {#{% endif %}#}
+            {#{% endfor %}#}
+
+            {#{% if pagerfanta.hasNextPage %}#}
+            {#<a href="{{path('homepage', {'page': pagerfanta.NextPage})}}"> Next </a>#}
+            {#{% endif %}#}
+            {#</div>#}
+
+
+
+
+        {#{%-endif-%}#}
+
+    {% endblock footer %}
