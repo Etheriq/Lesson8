@@ -11,7 +11,6 @@
 namespace Etheriq\Lesson8Bundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Guest
