@@ -83,6 +83,7 @@ dfsdfsd
 
     {% block content %}
 
+    {% if fanta.haveToPaginate %}
         {% for item in fanta %}
             <div class="well">
                 <u>Запись id # {{ item.id }}</u>.
@@ -93,6 +94,9 @@ dfsdfsd
                 {{ item.getBodyGuest()[:60] }}...<br>
             </div>
         {% endfor %}
+    {% else %}
+        end
+    {% endif %}
 
     {% endblock content %}
 

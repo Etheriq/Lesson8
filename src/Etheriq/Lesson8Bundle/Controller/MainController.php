@@ -22,8 +22,8 @@ class MainController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->getRepository('EtheriqLesson8Bundle:Guest')->findDESCGuests();  // Order by DESC
-        $query2 = $em->getRepository('EtheriqLesson8Bundle:Guest')->findAllGuests();  // normal order
-        $adapter = new DoctrineORMAdapter($query2);
+//        $query2 = $em->getRepository('EtheriqLesson8Bundle:Guest')->findAllGuests();  // normal order
+        $adapter = new DoctrineORMAdapter($query);
         $pagerFanta = new Pagerfanta($adapter);
 
         $pagerFanta->setMaxPerPage(5);
