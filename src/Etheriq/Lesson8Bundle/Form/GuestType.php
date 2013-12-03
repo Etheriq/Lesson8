@@ -24,9 +24,10 @@ class GuestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('email')
-            ->add('body');
+            ->add('nameGuest', 'text')
+            ->add('emailGuest', 'email')
+            ->add('bodyGuest', 'textarea')
+            ->add('save', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

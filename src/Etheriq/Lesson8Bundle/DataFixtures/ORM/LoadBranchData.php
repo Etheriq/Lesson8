@@ -35,7 +35,6 @@ class LoadBranchData extends AbstractFixture implements OrderedFixtureInterface
 
             $manager->persist($guest);
         }
-
         $manager->flush();
     }
 
