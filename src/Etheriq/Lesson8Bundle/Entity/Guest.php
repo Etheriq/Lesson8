@@ -32,7 +32,7 @@ class Guest
 
     /**
      *
-     * @Assert\Regex(pattern="/^[a-zA-Zaа-яА-Яа]+$/", message="Имя должно содержать только буквы")
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="Имя должно содержать только буквы латинского алфавита")
      * @Assert\NotBlank(message = "Имя: Это поле не должно быть пустым")
      * @Assert\Length(min = "5", minMessage = "Имя: Слишком короткое, минимальная длина {{ limit }} символов или больше")
      * @ORM\Column(type="string", length=120)
