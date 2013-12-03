@@ -11,6 +11,7 @@
 namespace Etheriq\Lesson8Bundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Guest
@@ -22,6 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Guest
 {
     /**
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -29,16 +31,26 @@ class Guest
     protected $id;
 
     /**
+     *
+     * @Assert\Regex(pattern="/^[a-zA-Zaа-яА-Яа]+$/", message="Имя должно содержать только буквы")
+     * @Assert\NotBlank(message = "Имя: Это поле не должно быть пустым")
+     * @Assert\Length(min = "5", minMessage = "Имя: Слишком короткое, минимальная длина {{ limit }} символов или больше")
      * @ORM\Column(type="string", length=120)
      */
     protected $nameGuest;
 
     /**
+     *
+     * @Assert\NotBlank(message = "Почта: Это поле не должно быть пустым")
+     * @Assert\Email(message = "Почта: Это не корректный адрес")
      * @ORM\Column(type="string", length=150)
      */
     protected $emailGuest;
 
     /**
+     *
+     * @Assert\NotBlank(message = "Сообщение: Это поле не должно быть пустым")
+     * @Assert\Length(min = "100", minMessage = "Сообщение: Слишком короткое, минимальная длина {{ limit }} символов или больше")
      * @ORM\Column(type="text")
      */
     protected $bodyGuest;
