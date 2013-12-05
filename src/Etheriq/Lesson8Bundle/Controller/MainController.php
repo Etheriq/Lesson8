@@ -11,6 +11,7 @@
 namespace Etheriq\Lesson8Bundle\Controller;
 
 use Etheriq\Lesson8Bundle\Entity\Guest;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -30,7 +31,13 @@ class MainController extends Controller
         $pagerFanta = new Pagerfanta($adapter);
 
         $pagerFanta->setMaxPerPage(5);
-        $pagerFanta->setCurrentPage($page);
+
+        try {
+            $pagerFanta->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e)
+        {
+            return $this->render('EtheriqLesson8Bundle:Pages:pageNotFound.html.twig', array('pageNumber' => $page));
+        }
 
 //        $nbResult = $pagerFanta->getNbResults();
 //        $currentPageResult = $pagerFanta->getCurrentPage();
@@ -63,7 +70,6 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
-
         $guestShow->setNameGuest($guestShow->getNameGuest());
         $guestShow->setEmailGuest($guestShow->getEmailGuest());
         $guestShow->setBodyGuest($guestShow->getBodyGuest());
