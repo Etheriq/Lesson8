@@ -34,8 +34,8 @@ class MainController extends Controller
 
         try {
             $pagerFanta->setCurrentPage($page);
-        } catch (NotValidCurrentPageException $e)
-        {
+        } catch (NotValidCurrentPageException $e) {
+
             return $this->render('EtheriqLesson8Bundle:Pages:pageNotFound.html.twig', array('pageNumber' => $page));
         }
 
