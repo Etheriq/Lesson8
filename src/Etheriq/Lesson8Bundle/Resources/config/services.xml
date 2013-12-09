@@ -6,12 +6,24 @@
 
     <parameters>
         <parameter key="fantaView">Pagerfanta\View\TwitterBootstrap3View</parameter>
+        <parameter key="guestListener">Etheriq\Lesson8Bundle\EventListener\GuestListener</parameter>
+        <parameter key="symfony.event.dispatcher">Symfony\Component\EventDispatcher\EventDispatcher</parameter>
     </parameters>
 
     <services>
 
         <service id="pagerfanta.view.twitter_bootstrap" class="%fantaView%" public="false">
             <tag name="pagerfanta.view" alias="myFantaSet" />
+        </service>
+
+        <service id="etheriq.show.listener" class="Etheriq\Lesson8Bundle\EventListener\GuestListener">
+            <call method="setMailer">
+                <argument type="service" id="mailer" />
+            </call>
+
+            <tag name="kernel.event_listener" event="guest.edit" method="onGuestShown" />
+            <tag name="kernel.event_listener" event="guest.add" method="onGuestCreated" />
+            <tag name="kernel.event_listener" event="guest.delete" method="onGuestDelete" />
         </service>
 
     </services>
