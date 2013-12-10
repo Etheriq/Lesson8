@@ -11,13 +11,15 @@
 namespace Etheriq\Lesson8Bundle\Controller;
 
 use Etheriq\Lesson8Bundle\Entity\Guest;
+use Etheriq\Lesson8Bundle\EventListener\RegisterEvent;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Etheriq\Lesson8Bundle\Form\GuestType;
+use Etheriq\Lesson8Bundle\EventListener\GuestListener;
+use Etheriq\Lesson8Bundle\EventListener\GuestEvent;
 
 class MainController extends Controller
 {
@@ -34,8 +36,8 @@ class MainController extends Controller
 
         try {
             $pagerFanta->setCurrentPage($page);
-        } catch (NotValidCurrentPageException $e)
-        {
+        } catch (NotValidCurrentPageException $e) {
+
             return $this->render('EtheriqLesson8Bundle:Pages:pageNotFound.html.twig', array('pageNumber' => $page));
         }
 
@@ -54,6 +56,11 @@ class MainController extends Controller
 
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
+
+            $guestEvent = new GuestEvent($guest);
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(RegisterEvent::GUEST_ADD, $guestEvent);
+
             $guestToDb->persist($guest);
             $guestToDb->flush();
 
@@ -79,6 +86,11 @@ class MainController extends Controller
 
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
+
+            $guestEvent = new GuestEvent($guestShow);
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
+
             $guestToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
@@ -91,6 +103,11 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
+
+        $guestEvent = new GuestEvent($guestDelete);
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
+
         $em->remove($guestDelete);
         $em->flush();
 

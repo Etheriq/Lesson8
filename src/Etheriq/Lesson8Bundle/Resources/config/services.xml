@@ -6,12 +6,32 @@
 
     <parameters>
         <parameter key="fantaView">Pagerfanta\View\TwitterBootstrap3View</parameter>
+        <parameter key="guestListener">Etheriq\Lesson8Bundle\EventListener\GuestListener</parameter>
+        <parameter key="guestSubscriber">Etheriq\Lesson8Bundle\EventListener\GuestSubscriber</parameter>
     </parameters>
 
     <services>
 
         <service id="pagerfanta.view.twitter_bootstrap" class="%fantaView%" public="false">
             <tag name="pagerfanta.view" alias="myFantaSet" />
+        </service>
+
+        <!--<service id="etheriq.show.listener" class="%guestListener%">-->
+            <!--<call method="setMailer">-->
+                <!--<argument type="service" id="mailer" />-->
+            <!--</call>-->
+
+            <!--<tag name="kernel.event_listener" event="guest.edit" method="onGuestShown" />-->
+            <!--<tag name="kernel.event_listener" event="guest.add" method="onGuestCreated" />-->
+            <!--<tag name="kernel.event_listener" event="guest.delete" method="onGuestDelete" />-->
+        <!--</service>-->
+
+        <service id="etheriq.subscriber" class="%guestSubscriber%">
+            <call method="setMailer">
+                <argument type="service" id="mailer" />
+            </call>
+
+            <tag name="kernel.event_subscriber" />
         </service>
 
     </services>
