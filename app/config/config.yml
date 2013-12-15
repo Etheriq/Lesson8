@@ -56,3 +56,9 @@ swiftmailer:
 
 #white_october_pagerfanta:
 #    default_view: myFantaSet
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true

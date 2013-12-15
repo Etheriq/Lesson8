@@ -15,7 +15,12 @@
         <div>
             {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
 
+            <div style="text-align: left; margin-left: 165px;">
+                <span> Создан: {{ created }} </span><br>
+                <span> Изменен: {{ updated }} </span><br><br>
+            </div>
             <div class="col-md-6" style="text-align: right">
+
                 <div class="form-inline">
                     {{ form_label(form.nameGuest, 'Имя:') }}
                     {{ form_widget(form.nameGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите имя' } }) }}

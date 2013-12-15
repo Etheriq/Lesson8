@@ -57,9 +57,9 @@ class MainController extends Controller
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
 
-            $guestEvent = new GuestEvent($guest);
-            $dispatcher = $this->get('event_dispatcher');
-            $dispatcher->dispatch(RegisterEvent::GUEST_ADD, $guestEvent);
+//            $guestEvent = new GuestEvent($guest);
+//            $dispatcher = $this->get('event_dispatcher');
+//            $dispatcher->dispatch(RegisterEvent::GUEST_ADD, $guestEvent);
 
             $guestToDb->persist($guest);
             $guestToDb->flush();
@@ -81,22 +81,29 @@ class MainController extends Controller
         $guestShow->setEmailGuest($guestShow->getEmailGuest());
         $guestShow->setBodyGuest($guestShow->getBodyGuest());
 
+        $created = $guestShow->getCreated()->format('d.m.Y G:i');
+        $updated = $guestShow->getUpdated()->format('d.m.Y G:i');
+
         $form = $this->createForm(new GuestType(), $guestShow);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
 
-            $guestEvent = new GuestEvent($guestShow);
-            $dispatcher = $this->get('event_dispatcher');
-            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
+//            $guestEvent = new GuestEvent($guestShow);
+//            $dispatcher = $this->get('event_dispatcher');
+//            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
 
             $guestToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('EtheriqLesson8Bundle:Pages:showInfo.html.twig', array('form' => $form->createView()));
+        return $this->render('EtheriqLesson8Bundle:Pages:showInfo.html.twig', array(
+            'form' => $form->createView(),
+            'created' => $created,
+            'updated' => $updated
+            ));
     }
 
     public function deleteItemAction($id)
@@ -104,9 +111,9 @@ class MainController extends Controller
         $em = $this->getDoctrine()->getManager();
         $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
 
-        $guestEvent = new GuestEvent($guestDelete);
-        $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
+//        $guestEvent = new GuestEvent($guestDelete);
+//        $dispatcher = $this->get('event_dispatcher');
+//        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
 
         $em->remove($guestDelete);
         $em->flush();
