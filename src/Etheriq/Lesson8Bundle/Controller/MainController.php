@@ -77,6 +77,11 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->findOneBy(array('slug' => $slug));
+
+        if (!$guestShow) {
+            return $this->render('EtheriqLesson8Bundle:Pages:pageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
         $guestShow->setNameGuest($guestShow->getNameGuest());
         $guestShow->setEmailGuest($guestShow->getEmailGuest());
         $guestShow->setBodyGuest($guestShow->getBodyGuest());
