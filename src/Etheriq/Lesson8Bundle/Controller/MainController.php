@@ -27,6 +27,8 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+//        $em->getFilters()->disable('softdeleteable');  // to display removed data
+
         $query = $em->getRepository('EtheriqLesson8Bundle:Guest')->findDESCGuests();  // Order by DESC
 //        $query2 = $em->getRepository('EtheriqLesson8Bundle:Guest')->findAllGuests();  // normal order
         $adapter = new DoctrineORMAdapter($query);
