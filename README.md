@@ -1,5 +1,14 @@
 Домашняя работа №10
 
+Продолжаем делать лабораторную работу №8 (гостевая кига)
+
+В этой работе изучались Doctrine Event
+В частности использовались следующие Doctrine Extensions:
+- Timestampable;
+- Sluggable;
+- Softdeleteable;
+
+
 
 
 
