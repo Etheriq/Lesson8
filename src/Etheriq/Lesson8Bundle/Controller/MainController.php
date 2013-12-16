@@ -73,10 +73,10 @@ class MainController extends Controller
         ));
     }
 
-    public function showMoreInfoAction($id, Request $request)
+    public function showMoreInfoAction($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
+        $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->findOneBy(array('slug' => $slug));
         $guestShow->setNameGuest($guestShow->getNameGuest());
         $guestShow->setEmailGuest($guestShow->getEmailGuest());
         $guestShow->setBodyGuest($guestShow->getBodyGuest());
@@ -106,10 +106,10 @@ class MainController extends Controller
             ));
     }
 
-    public function deleteItemAction($id)
+    public function deleteItemAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
+        $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->findOneBy(array('slug' => $slug));
 
 //        $guestEvent = new GuestEvent($guestDelete);
 //        $dispatcher = $this->get('event_dispatcher');

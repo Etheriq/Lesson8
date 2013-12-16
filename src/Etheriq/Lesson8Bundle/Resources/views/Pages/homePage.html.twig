@@ -62,8 +62,8 @@
         {% for item in fanta %}
             <div class="well">
                 <u>Запись id # {{ item.id }}</u>.
-                <a href="{{ path('delete_item', {'id': item.id}) }}" class="btn btn-danger btn-sm">Delete</a>
-                <a href="{{ path('show_info', {'id': item.id}) }}" class="btn btn-info btn-sm">More info</a>
+                <a href="{{ path('delete_item', {'slug': item.slug}) }}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{{ path('show_info', {'slug': item.slug}) }}" class="btn btn-info btn-sm">More info</a>
                 <span> Создан: {{ item.getCreated()| date("d.m.Y G:i") }} </span>
                 <span> Изменен: {{ item.getUpdated()| date("d.m.Y G:i") }} </span>
                 <hr>
