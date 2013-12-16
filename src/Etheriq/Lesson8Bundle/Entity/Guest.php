@@ -47,7 +47,7 @@ class Guest
 
     /**
      *
-     * @Gedmo\Slug(fields={"nameGuest"}, suffix=".guest")
+     * @Gedmo\Slug(fields={"nameGuest"})
      * @ORM\Column(type="string", length=250, unique=true)
      */
     protected $slug;

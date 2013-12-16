@@ -5,13 +5,9 @@ homepage:
             page:  \d+
 
 show_info:
-    pattern: /show/{id}
-    defaults: { _controller: EtheriqLesson8Bundle:Main:showMoreInfo, id: 1 }
-    requirements:
-                id:  \d+
+    pattern: /show/{slug}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:showMoreInfo }
 
 delete_item:
-    pattern: /del/{id}
-    defaults: { _controller: EtheriqLesson8Bundle:Main:deleteItem, id: 1 }
-    requirements:
-                id:  \d+
+    pattern: /del/{slug}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:deleteItem }
