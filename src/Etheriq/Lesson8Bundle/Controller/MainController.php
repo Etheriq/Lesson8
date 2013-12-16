@@ -27,6 +27,8 @@ class MainController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+//        $em->getFilters()->disable('softdeleteable');  // to display removed data
+
         $query = $em->getRepository('EtheriqLesson8Bundle:Guest')->findDESCGuests();  // Order by DESC
 //        $query2 = $em->getRepository('EtheriqLesson8Bundle:Guest')->findAllGuests();  // normal order
         $adapter = new DoctrineORMAdapter($query);
@@ -57,9 +59,9 @@ class MainController extends Controller
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
 
-            $guestEvent = new GuestEvent($guest);
-            $dispatcher = $this->get('event_dispatcher');
-            $dispatcher->dispatch(RegisterEvent::GUEST_ADD, $guestEvent);
+//            $guestEvent = new GuestEvent($guest);
+//            $dispatcher = $this->get('event_dispatcher');
+//            $dispatcher->dispatch(RegisterEvent::GUEST_ADD, $guestEvent);
 
             $guestToDb->persist($guest);
             $guestToDb->flush();
@@ -73,13 +75,21 @@ class MainController extends Controller
         ));
     }
 
-    public function showMoreInfoAction($id, Request $request)
+    public function showMoreInfoAction($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
+        $guestShow = $em->getRepository('EtheriqLesson8Bundle:Guest')->findOneBy(array('slug' => $slug));
+
+        if (!$guestShow) {
+            return $this->render('EtheriqLesson8Bundle:Pages:pageNotFound.html.twig', array('pageNumber' => $slug));
+            exit;
+        }
         $guestShow->setNameGuest($guestShow->getNameGuest());
         $guestShow->setEmailGuest($guestShow->getEmailGuest());
         $guestShow->setBodyGuest($guestShow->getBodyGuest());
+
+        $created = $guestShow->getCreated()->format('d.m.Y G:i');
+        $updated = $guestShow->getUpdated()->format('d.m.Y G:i');
 
         $form = $this->createForm(new GuestType(), $guestShow);
         $form->handleRequest($request);
@@ -87,26 +97,30 @@ class MainController extends Controller
         if ($form->isValid()) {
             $guestToDb = $this->getDoctrine()->getManager();
 
-            $guestEvent = new GuestEvent($guestShow);
-            $dispatcher = $this->get('event_dispatcher');
-            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
+//            $guestEvent = new GuestEvent($guestShow);
+//            $dispatcher = $this->get('event_dispatcher');
+//            $dispatcher->dispatch(RegisterEvent::GUEST_EDIT, $guestEvent);
 
             $guestToDb->flush();
 
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('EtheriqLesson8Bundle:Pages:showInfo.html.twig', array('form' => $form->createView()));
+        return $this->render('EtheriqLesson8Bundle:Pages:showInfo.html.twig', array(
+            'form' => $form->createView(),
+            'created' => $created,
+            'updated' => $updated
+            ));
     }
 
-    public function deleteItemAction($id)
+    public function deleteItemAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->find($id);
+        $guestDelete = $em->getRepository('EtheriqLesson8Bundle:Guest')->findOneBy(array('slug' => $slug));
 
-        $guestEvent = new GuestEvent($guestDelete);
-        $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
+//        $guestEvent = new GuestEvent($guestDelete);
+//        $dispatcher = $this->get('event_dispatcher');
+//        $dispatcher->dispatch(RegisterEvent::GUEST_DELETE, $guestEvent);
 
         $em->remove($guestDelete);
         $em->flush();

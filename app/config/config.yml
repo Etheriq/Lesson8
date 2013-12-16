@@ -41,10 +41,15 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: %kernel.root_dir%/data/data.db3
         # path:     %database_path%
-
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -56,3 +61,11 @@ swiftmailer:
 
 #white_october_pagerfanta:
 #    default_view: myFantaSet
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+            softdeleteable: true

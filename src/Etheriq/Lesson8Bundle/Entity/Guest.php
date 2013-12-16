@@ -12,6 +12,7 @@ namespace Etheriq\Lesson8Bundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Guest
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="Etheriq\Lesson8Bundle\Repository\GuestRepository")
  * @ORM\Table(name="guest")
+ * @Gedmo\SoftDeleteable(fieldName="deletedGuest", timeAware=false)
  */
 class Guest
 {
@@ -32,10 +34,44 @@ class Guest
 
     /**
      *
+     * @ORM\Column(name="deletedGuest", type="datetime", nullable=true)
+     */
+    protected $deletedGuest;
+
+    /**
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
+
+    /**
+     *
+     * @Gedmo\Slug(fields={"nameGuest"})
+     * @ORM\Column(type="string", length=250, unique=true)
+     */
+    protected $slug;
+
+    /**
+     *
+     * @ORM\Column(name="name_changed", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="change", field={"nameGuest"})
+     */
+    protected $nameChanged;
+
+    /**
+     *
      * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="Имя должно содержать только буквы латинского алфавита")
      * @Assert\NotBlank(message = "Имя: Это поле не должно быть пустым")
      * @Assert\Length(min = "5", minMessage = "Имя: Слишком короткое, минимальная длина {{ limit }} символов или больше")
-     * @ORM\Column(type="string", length=120)
+     * @ORM\Column(type="string", length=120, unique=true)
      */
     protected $nameGuest;
 
@@ -132,5 +168,120 @@ class Guest
     public function getBodyGuest()
     {
         return $this->bodyGuest;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Guest
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Guest
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set nameChanged
+     *
+     * @param \DateTime $nameChanged
+     * @return Guest
+     */
+    public function setNameChanged($nameChanged)
+    {
+        $this->nameChanged = $nameChanged;
+    
+        return $this;
+    }
+
+    /**
+     * Get nameChanged
+     *
+     * @return \DateTime 
+     */
+    public function getNameChanged()
+    {
+        return $this->nameChanged;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Guest
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set deletedGuest
+     *
+     * @param \DateTime $deletedGuest
+     * @return Guest
+     */
+    public function setDeletedGuest($deletedGuest)
+    {
+        $this->deletedGuest = $deletedGuest;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedGuest
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedGuest()
+    {
+        return $this->deletedGuest;
     }
 }
