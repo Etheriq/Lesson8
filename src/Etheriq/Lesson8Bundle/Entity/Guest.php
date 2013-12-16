@@ -47,6 +47,13 @@ class Guest
 
     /**
      *
+     * @Gedmo\Slug(fields={"nameGuest"}, suffix=".guest")
+     * @ORM\Column(type="string", length=250, unique=true)
+     */
+    protected $slug;
+
+    /**
+     *
      * @ORM\Column(name="name_changed", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="change", field={"nameGuest"})
      */
@@ -223,5 +230,28 @@ class Guest
     public function getNameChanged()
     {
         return $this->nameChanged;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Guest
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -16,23 +16,12 @@
             <tag name="pagerfanta.view" alias="myFantaSet" />
         </service>
 
-        <!--<service id="etheriq.show.listener" class="%guestListener%">-->
-            <!--<call method="setMailer">-->
-                <!--<argument type="service" id="mailer" />-->
-            <!--</call>-->
-
-            <!--<tag name="kernel.event_listener" event="guest.edit" method="onGuestShown" />-->
-            <!--<tag name="kernel.event_listener" event="guest.add" method="onGuestCreated" />-->
-            <!--<tag name="kernel.event_listener" event="guest.delete" method="onGuestDelete" />-->
-        <!--</service>-->
-
-        <service id="etheriq.subscriber" class="%guestSubscriber%">
+         <service id="etheriq.subscriber" class="%guestSubscriber%">
             <call method="setMailer">
                 <argument type="service" id="mailer" />
             </call>
-
             <tag name="kernel.event_subscriber" />
-        </service>
+         </service>
 
     </services>
 
