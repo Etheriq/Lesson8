@@ -20,6 +20,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Entity(repositoryClass="Etheriq\Lesson8Bundle\Repository\GuestRepository")
  * @ORM\Table(name="guest")
+ * @Gedmo\SoftDeleteable(fieldName="deletedGuest", timeAware=false)
  */
 class Guest
 {
@@ -30,6 +31,12 @@ class Guest
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     *
+     * @ORM\Column(name="deletedGuest", type="datetime", nullable=true)
+     */
+    protected $deletedGuest;
 
     /**
      *
@@ -253,5 +260,28 @@ class Guest
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set deletedGuest
+     *
+     * @param \DateTime $deletedGuest
+     * @return Guest
+     */
+    public function setDeletedGuest($deletedGuest)
+    {
+        $this->deletedGuest = $deletedGuest;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedGuest
+     *
+     * @return \DateTime 
+     */
+    public function getDeletedGuest()
+    {
+        return $this->deletedGuest;
     }
 }
