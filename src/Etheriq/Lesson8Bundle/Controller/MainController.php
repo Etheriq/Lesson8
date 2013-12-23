@@ -20,12 +20,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\Lesson8Bundle\Form\GuestType;
 use Etheriq\Lesson8Bundle\EventListener\GuestListener;
 use Etheriq\Lesson8Bundle\EventListener\GuestEvent;
+use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends Controller
 {
     public function showHomePageAction($page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+//        $locale = $this->get('request')->getLocale();
+        $locale = $request->getLocale();
+        $request->setLocale($locale);
 
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
 
@@ -71,7 +75,8 @@ class MainController extends Controller
 
         return $this->render('EtheriqLesson8Bundle:Pages:homePage.html.twig', array(
             'fanta' => $pagerFanta,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'locale' => $locale
         ));
     }
 
@@ -126,5 +131,11 @@ class MainController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    public function setLocaleAction($loc)
+    {
+        $this->get('request')->setLocale($loc);
+        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
 }

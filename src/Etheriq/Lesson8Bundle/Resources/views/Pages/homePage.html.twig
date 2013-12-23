@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block header %}
+
    <nav>
             <div class="col-md-7" style="text-align: right;">
                 <div class="pagerfanta">
@@ -13,14 +14,35 @@
             </div>
             <div class="col-md-4" style="text-align: left;">
                 <div style="padding-top: 35px;">
-                <strong>{{fanta.NbResults}}</strong> guests has found.
+                <strong>{{fanta.NbResults}}</strong> {{ 'guests has found'|trans }}.
 
                 {% if fanta.haveToPaginate %}
-                    Page <strong>{{fanta.CurrentPage}}/{{fanta.NbPages}} </strong>
+                    {{ 'Page'|trans }} <strong>{{fanta.CurrentPage}}/{{fanta.NbPages}} </strong>
                 {% endif %}
                 </div>
             </div>
-   </nav>
+       </nav>
+
+    <div style="position: absolute; left: 20px; top: 10px;">
+        <ul style="padding: 0; margin: 0;">
+            <li style="float: left; padding: 0px; list-style: none;">
+                <a href="{{ path('set_locale', {'loc': 'en'}) }}">
+                    <img src="{{ asset('img/flag_great_britain.png') }}" alt="English">
+                </a>
+            </li>
+            <li style="float: left; padding-left: 10px; padding-right: 10px; list-style: none;">
+                <a href="{{ path('set_locale', {'loc': 'ru'}) }}" >
+                    <img src="{{ asset('img/flag_russia.png') }}" alt="Russian">
+                </a>
+            </li>
+            <li style="float: left; padding: 0px; list-style: none;">
+                <a href="{{ path('set_locale', {'loc': 'uk'}) }}" >
+                    <img src="{{ asset('img/flag_ukraine.png') }}" alt="Ukrainian">
+                </a>
+            </li>
+        </ul>
+    </div>
+
 {% endblock header %}
 
     {% block guestForm %}
@@ -28,16 +50,16 @@
             {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
                 <div class="col-md-6" style="text-align: right">
                         <div class="form-inline">
-                            {{ form_label(form.nameGuest, 'Имя:') }}
+                            {{ form_label(form.nameGuest, 'Name'|trans|raw) }}
                             {{ form_widget(form.nameGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите имя' } }) }}
 
-                            {{ form_label(form.emailGuest, 'Почта:') }}
+                            {{ form_label(form.emailGuest, 'E-mail'|trans|raw) }}
                             {{ form_widget(form.emailGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите почтовый адрес' } }) }}
 
                             {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
                         </div>
                     <div class="form-inline" style="margin: 5px 0;">
-                    {{ form_label(form.bodyGuest, 'Сообщение:') }}
+                    {{ form_label(form.bodyGuest, 'Message'|trans|raw) }}
                     {{ form_widget(form.bodyGuest, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 50px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
                     </div>
                 </div>
@@ -61,11 +83,11 @@
     {% if fanta.haveToPaginate %}
         {% for item in fanta %}
             <div class="well">
-                <u>Запись id # {{ item.id }}</u>.
-                <a href="{{ path('delete_item', {'slug': item.slug}) }}" class="btn btn-danger btn-sm">Delete</a>
-                <a href="{{ path('show_info', {'slug': item.slug}) }}" class="btn btn-info btn-sm">More info</a>
-                <span> Создан: {{ item.getCreated()| date("d.m.Y G:i") }} </span>
-                <span> Изменен: {{ item.getUpdated()| date("d.m.Y G:i") }} </span>
+                <u>{{ 'Record'|trans }} id # {{ item.id }}</u>.
+                <a href="{{ path('delete_item', {'slug': item.slug}) }}" class="btn btn-danger btn-sm">{{ 'Delete'|trans }}</a>
+                <a href="{{ path('show_info', {'slug': item.slug}) }}" class="btn btn-info btn-sm">{{ 'More info'|trans }}</a>
+                <span> {{ 'Created'|trans }}: {{ item.getCreated()| date("d.m.Y G:i") }} </span>
+                <span> {{ 'Changed'|trans }}: {{ item.getUpdated()| date("d.m.Y G:i") }} </span>
                 <hr>
                 <b>{{ item.getNameGuest() }}</b>  ({{ item.getEmailGuest() }})<br>
                 {{ item.getBodyGuest()[:100] }} ...<br>
