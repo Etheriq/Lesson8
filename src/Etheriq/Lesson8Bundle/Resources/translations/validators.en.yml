@@ -1,0 +1,6 @@
+name.not_blank: Name. This field must not be empty
+name.short: The name is too short, the minimum length of 5 characters or more
+email.not_blank: E-mail. This field must not be empty
+email.not_correct: E-mail. This is not a valid email address
+message.not_blank: Message. This field must not be empty
+message.minLenght_error: Message is too short, the minimum length of 100 characters or more

@@ -136,7 +136,6 @@ class MainController extends Controller
     public function setLocaleAction($loc)
     {
         $this->get('request')->setLocale($loc);
-        //$this->get('session')->set('_locale', $loc);
         return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
 }
