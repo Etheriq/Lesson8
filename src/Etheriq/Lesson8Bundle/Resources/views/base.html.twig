@@ -16,6 +16,7 @@
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: #e0e0e0; height: 170px; overflow-y: auto;">
     <div style="text-align: center; vertical-align: middle; line-height: 0px;">
+
         {% block header %}
 
         {% endblock header %}
@@ -26,7 +27,8 @@
         {% endblock guestForm %}
     </div>
     </nav>
-    <div style="margin-top: 183px; overflow-y: scroll; height: 89%; padding: 10px;">
+
+     <div style="margin-top: 183px; overflow-y: scroll; height: 89%; padding: 10px;">
         {% block content %}
 
         {% endblock content %}
@@ -39,7 +41,6 @@
         {% endblock footer %}
     </div>
     </nav>
-
 {% endblock body %}
 
 {% block javascripts %}

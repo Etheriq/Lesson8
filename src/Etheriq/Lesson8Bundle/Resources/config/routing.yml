@@ -1,13 +1,22 @@
 homepage:
-    pattern:  /{page}
+    pattern:  /{_locale}/{page}
     defaults: { _controller: EtheriqLesson8Bundle:Main:showHomePage, page: 1 }
     requirements:
             page:  \d+
+            _locale: en|ru|uk
 
 show_info:
-    pattern: /show/{slug}
+    pattern: /{_locale}/show/{slug}
     defaults: { _controller: EtheriqLesson8Bundle:Main:showMoreInfo }
+    requirements:
+            _locale: en|ru|uk
 
 delete_item:
     pattern: /del/{slug}
     defaults: { _controller: EtheriqLesson8Bundle:Main:deleteItem }
+
+set_locale:
+    pattern: /setLocale/{loc}
+    defaults: { _controller: EtheriqLesson8Bundle:Main:setLocale, loc: en }
+    requirements:
+            loc: en|ru|uk
