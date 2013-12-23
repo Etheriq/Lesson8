@@ -1,6 +1,6 @@
 homepage:
     pattern:  /{_locale}/{page}
-    defaults: { _controller: EtheriqLesson8Bundle:Main:showHomePage, page: 1 }
+    defaults: { _controller: EtheriqLesson8Bundle:Main:showHomePage, _locale: en, page: 1 }
     requirements:
             page:  \d+
             _locale: en|ru|uk
