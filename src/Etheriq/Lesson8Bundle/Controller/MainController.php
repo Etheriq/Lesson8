@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Etheriq\Lesson8Bundle\Form\GuestType;
 use Etheriq\Lesson8Bundle\EventListener\GuestListener;
 use Etheriq\Lesson8Bundle\EventListener\GuestEvent;
+use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends Controller
 {
@@ -126,5 +127,11 @@ class MainController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    public function setLocaleAction($loc)
+    {
+        $this->get('request')->setLocale($loc);
+        return $this->redirect($this->generateUrl('homepage', array('_locale' => $loc) ));
     }
 }

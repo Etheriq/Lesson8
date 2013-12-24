@@ -6,7 +6,7 @@
 
 {% block header %}
     <nav style="margin: 20px 0 20px 150px; text-align: left;">
-<a href="{{ path('homepage') }}" class="btn btn-default">На главную</a>
+<a href="{{ path('homepage') }}" class="btn btn-default">{{ 'On Main'|trans }}</a>
     </nav>
 {% endblock header %}
 
@@ -16,22 +16,22 @@
             {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
 
             <div style="text-align: left; margin-left: 165px;">
-                <span> Создан: {{ created }} </span><br>
-                <span> Изменен: {{ updated }} </span><br><br>
+                <span> {{ 'Created'|trans }}: {{ created }} </span><br>
+                <span> {{ 'Changed'|trans }}: {{ updated }} </span><br><br>
             </div>
             <div class="col-md-6" style="text-align: right">
 
                 <div class="form-inline">
-                    {{ form_label(form.nameGuest, 'Имя:') }}
+                    {{ form_label(form.nameGuest, 'Name'|trans|raw) }}
                     {{ form_widget(form.nameGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите имя' } }) }}
 
-                    {{ form_label(form.emailGuest, 'Почта:') }}
+                    {{ form_label(form.emailGuest, 'E-mail'|trans|raw) }}
                     {{ form_widget(form.emailGuest, { 'attr': {'class': 'form-control', 'style': 'width:30%; ', 'placeholder': 'Введите почтовый адрес' } }) }}
 
                     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-success'} }) }}
                 </div>
                 <div class="form-inline" style="margin: 5px 0;">
-                    {{ form_label(form.bodyGuest, 'Сообщение:') }}
+                    {{ form_label(form.bodyGuest, 'Message'|trans|raw) }}
                     {{ form_widget(form.bodyGuest, { 'attr': {'class': 'form-control', 'style': 'width:80%; height: 250px;', 'placeholder': 'Введите сообщение, минимальная длина 100 символом ' } }) }}
 
                 </div>

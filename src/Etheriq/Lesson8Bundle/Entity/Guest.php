@@ -68,25 +68,25 @@ class Guest
 
     /**
      *
-     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="Имя должно содержать только буквы латинского алфавита")
-     * @Assert\NotBlank(message = "Имя: Это поле не должно быть пустым")
-     * @Assert\Length(min = "5", minMessage = "Имя: Слишком короткое, минимальная длина {{ limit }} символов или больше")
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="name.regex.error")
+     * @Assert\NotBlank(message = "name.not_blank")
+     * @Assert\Length(min = "5", minMessage = "name.short")
      * @ORM\Column(type="string", length=120, unique=true)
      */
     protected $nameGuest;
 
     /**
      *
-     * @Assert\NotBlank(message = "Почта: Это поле не должно быть пустым")
-     * @Assert\Email(message = "Почта: Это не корректный адрес")
+     * @Assert\NotBlank(message = "email.not_blank")
+     * @Assert\Email(message = "email.not_correct")
      * @ORM\Column(type="string", length=150)
      */
     protected $emailGuest;
 
     /**
      *
-     * @Assert\NotBlank(message = "Сообщение: Это поле не должно быть пустым")
-     * @Assert\Length(min = "100", minMessage = "Сообщение: Слишком короткое, минимальная длина {{ limit }} символов или больше")
+     * @Assert\NotBlank(message = "message.not_blank")
+     * @Assert\Length(min = "100", minMessage = "message.minLenght_error")
      * @ORM\Column(type="text")
      */
     protected $bodyGuest;
