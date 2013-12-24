@@ -68,7 +68,7 @@ class Guest
 
     /**
      *
-     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="Имя должно содержать только буквы латинского алфавита")
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="name.regex.error")
      * @Assert\NotBlank(message = "name.not_blank")
      * @Assert\Length(min = "5", minMessage = "name.short")
      * @ORM\Column(type="string", length=120, unique=true)
