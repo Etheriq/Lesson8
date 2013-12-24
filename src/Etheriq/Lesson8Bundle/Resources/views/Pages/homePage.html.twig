@@ -90,7 +90,8 @@
                 <span> {{ 'Changed'|trans }}: {{ item.getUpdated()| date("d.m.Y G:i") }} </span>
                 <hr>
                 <b>{{ item.getNameGuest() }}</b>  ({{ item.getEmailGuest() }})<br>
-                {{ item.getBodyGuest()[:100] }} ...<br>
+                {#{{ item.getBodyGuest()[:100] }} ...<br>#}
+                {{ item.getBodyGuest()|limitWords(35, path('show_info', {'slug': item.slug}))|raw }}
             </div>
         {% endfor %}
     {% endif %}
