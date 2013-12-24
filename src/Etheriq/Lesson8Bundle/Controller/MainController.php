@@ -27,9 +27,6 @@ class MainController extends Controller
     public function showHomePageAction($page, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-//        $locale = $this->get('request')->getLocale();
-        $locale = $request->getLocale();
-        $request->setLocale($locale);
 
 //        $em->getFilters()->disable('softdeleteable');  // to display removed data
 
@@ -75,8 +72,7 @@ class MainController extends Controller
 
         return $this->render('EtheriqLesson8Bundle:Pages:homePage.html.twig', array(
             'fanta' => $pagerFanta,
-            'form' => $form->createView(),
-            'locale' => $locale
+            'form' => $form->createView()
         ));
     }
 
